@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.Aktor
+﻿@model  IEnumerable<WebApplication1.Models.Aktor>
 
 @{
     ViewBag.Title = "Index";
@@ -10,25 +10,19 @@
     <h4>Aktor</h4>
     <hr />
     <dl class="dl-horizontal">
+        @foreach (var aktor in Model)
+        {
         <dt>
-            @Html.DisplayNameFor(model => model.Imie)
+            @aktor.Imie
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Imie)
-        </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            @aktor.Nazwisko
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nazwisko)
-        </dd>
-
+        }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+   
     @Html.ActionLink("Back to List", "Index")
 </p>
