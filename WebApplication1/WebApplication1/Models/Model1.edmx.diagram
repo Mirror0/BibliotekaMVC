@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0adf6b9b2ba44cf9f6c0f12a568d948" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryDBModel.Aktor" Width="1.5" PointX="8" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Autor" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Czasopismo" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Czytelnik" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Film" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Ksiazka" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Praca_Naukowa" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Slowo_Kluczowe" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Wiadomosci" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Wydawca" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Wypozyczenia_Czasopisma" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Wypozyczenia_Filmu" Width="1.5" PointX="10.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryDBModel.Wypozyczenia_Ksiazki" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="LibraryDBModel.FK__Film__ID_Aktora__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK_Film" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Czasopism__ID_Au__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Ksiazka__ID_Auto__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Praca_Nau__ID_Au__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Czasopism__ID_Wy__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Cz__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wiadomosc__ID_Cz__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Cz__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Cz__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Cz__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Fi__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Ksiazka__ID_Slow__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Ksiazka__ID_Wyda__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryDBModel.FK__Wypozycze__ID_Ks__571DF1D5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
