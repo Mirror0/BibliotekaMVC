@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
 }
 
@@ -7,19 +6,61 @@
 
 <table class="table">
 
-   <tr>
-       <td>
-           <label>Zarządzaj </label>
-           <ul>
-               <li>
-                   @Html.ActionLink("Edytuj Profil", "Edit", "Czytelnicy", new { id = Session["UserID"] }, null)
-               </li>
-               <li>
-                   @Html.ActionLink("Wyloguj", "Edit", "Czytelnicy", new { }, null)
-               </li>
-           </ul>
-       </td>
-   </tr>
+    <tr>
+        <td>
+            <label>Zarządzaj Kontem</label>
+            <ul>
+                <li>
+                    @Html.ActionLink("Edytuj Profil", "Edit", "Czytelnicy", new { id = Session["UserID"] }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Moje Wiadomości", "Index", "Wiadomosci", new { }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Wyloguj", "Logout", "Konta", new { }, null)
+                </li>
+            </ul>
+        </td>
+        @if (Session["UserRole"] != null)
+        {
+            var userRole = Int32.Parse(Session["UserRole"].ToString());
+            if (userRole > 0)
+            {
+                <td>
+                    <label>Panel Administracyjny</label>
+                    <ul>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Czytelnikami", "Index", "Czytelnicy", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Książkami", "Index", "Ksiazki", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Czasopismami", "Index", "Czasopisma", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Pracami Naukowymi", "Index", "Prace_Naukowe", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Słowami Kluczowymi", "Index", "Słowa_Kluczowe", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Autorami", "Index", "Autorzy", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Wydawcami", "Index", "Wydawcy", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Filmami", "Index", "Filmy", new { }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Zarządzaj Aktorami", "Index", "Aktorzy", new { }, null)
+                        </li>
+                    </ul>
+                </td>
+            }
+        }
+    </tr>
 
 
 </table>

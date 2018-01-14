@@ -46,13 +46,15 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @if (Session["UserID"] != null) {
-
-                if (item.Rola < Model.Where(x => x.ID.ToString().Equals(Session["UserID"])).FirstOrDefault().Rola)
+            @if (Session["UserID"] != null)
+            {
+                if (Model.Where(x => x.ID.ToString().Equals(Session["UserID"])).FirstOrDefault().Rola > item.Rola)
                 {
-                    Html.ActionLink("Edit", "Edit", new { id = item.ID });
-                    Html.ActionLink("Details", "Details", new { id = item.ID });
-                    Html.ActionLink("Delete", "Delete", new { id = item.ID });
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    <br />
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 }
             }
         </td>

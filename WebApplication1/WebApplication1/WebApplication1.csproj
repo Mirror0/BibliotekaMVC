@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CzytelnicyController.cs" />
     <Compile Include="Controllers\FilmyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KoszykController.cs" />
     <Compile Include="Controllers\KsiazkiController.cs" />
     <Compile Include="Controllers\KontaController.cs" />
     <Compile Include="Controllers\Prace_NaukoweController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Models\Autor.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Rzecz.cs" />
     <Compile Include="Models\Czasopismo.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -208,6 +210,9 @@
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Praca_Naukowa.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rola.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Slowo_Kluczowe.cs">
@@ -342,6 +347,7 @@
     <Content Include="Views\Konta\Login.cshtml" />
     <Content Include="Views\Konta\Register.cshtml" />
     <Content Include="Views\Konta\Dashboard.cshtml" />
+    <Content Include="Views\Koszyk\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Form\" />
