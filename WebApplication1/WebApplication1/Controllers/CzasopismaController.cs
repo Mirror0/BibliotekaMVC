@@ -15,6 +15,8 @@ namespace WebApplication1.Controllers
         private LibDBEntities db = new LibDBEntities();
 
         // GET: Czasopisma
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var czasopismo = db.Czasopismo.Include(c => c.Autor).Include(c => c.Wydawca);
@@ -22,6 +24,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Czasopisma/Details/5
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

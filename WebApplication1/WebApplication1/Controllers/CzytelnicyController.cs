@@ -10,13 +10,22 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class CzytelnicyController : Controller
     {
         private LibDBEntities db = new LibDBEntities();
 
         // GET: Czytelnicy
+        [Authorize]
+        [HttpGet]
         public ActionResult Index()
         {
+            int id = 0;
+            if (Session["UserID"] != null)
+            {
+                id = Int32.Parse(Session["UserID"].ToString());
+            }
+            //ViewBag.UserName = db.Czytelnik.Find(id).Uzytkownik.ToString();
             return View(db.Czytelnik.ToList());
         }
 

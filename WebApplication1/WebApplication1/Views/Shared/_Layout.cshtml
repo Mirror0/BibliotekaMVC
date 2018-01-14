@@ -23,6 +23,16 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @{
+                        string loggedin = HttpContext.Current.User.Identity.Name;
+                        if (!string.IsNullOrEmpty(loggedin))
+                        {
+                            <li> @Html.ActionLink("Zarządzaj","Dashboard", "Konta")</li>
+
+                        }
+
+
+                     }
                 </ul>
             </div>
         </div>

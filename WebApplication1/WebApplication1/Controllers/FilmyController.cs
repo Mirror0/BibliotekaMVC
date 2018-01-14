@@ -15,6 +15,8 @@ namespace WebApplication1.Controllers
         private LibDBEntities db = new LibDBEntities();
 
         // GET: Filmy
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var film = db.Film.Include(f => f.Aktor);
@@ -22,6 +24,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Filmy/Details/5
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
