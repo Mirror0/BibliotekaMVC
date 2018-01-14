@@ -52,7 +52,14 @@ namespace WebApplication1.Controllers
                     FormsAuthentication.SetAuthCookie(currentuser.ID.ToString(), false);
                     Session["UserID"] = currentuser.ID.ToString();
                     Session["UserRole"] = currentuser.Rola.ToString();
-                    return Redirect(ReturnUrl);
+                    if (!string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index","Ksiazki");
+                    }
                 }
             }
 
