@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<table class="table">
+
+   <tr>
+       <td>
+           <label>Zarządzaj </label>
+           <ul>
+               <li>
+                   @Html.ActionLink("Edytuj Profil", "Edit", "Czytelnicy", new { id = Session["UserID"] }, null)
+               </li>
+               <li>
+                   @Html.ActionLink("Wyloguj", "Edit", "Czytelnicy", new { }, null)
+               </li>
+           </ul>
+       </td>
+   </tr>
+
+
+</table>

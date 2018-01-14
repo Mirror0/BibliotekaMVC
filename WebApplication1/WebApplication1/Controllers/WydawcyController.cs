@@ -15,12 +15,16 @@ namespace WebApplication1.Controllers
         private LibDBEntities db = new LibDBEntities();
 
         // GET: Wydawcy
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Wydawca.ToList());
         }
 
         // GET: Wydawcy/Details/5
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -15,6 +15,8 @@ namespace WebApplication1.Controllers
         private LibDBEntities db = new LibDBEntities();
 
         // GET: Prace_Naukowe
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var praca_Naukowa = db.Praca_Naukowa.Include(p => p.Autor);
@@ -22,6 +24,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Prace_Naukowe/Details/5
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

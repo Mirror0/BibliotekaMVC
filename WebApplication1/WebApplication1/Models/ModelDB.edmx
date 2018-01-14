@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LibDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LibDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aktor">
           <Key>
             <PropertyRef Name="ID" />
@@ -42,6 +42,7 @@
           <Property Name="Uzytkownik" Type="varchar" MaxLength="30" />
           <Property Name="Haslo" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Rola" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Film">
           <Key>
@@ -392,8 +393,7 @@
             <End Role="Wypozyczenia_Ksiazki" EntitySet="Wypozyczenia_Ksiazki" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -445,6 +445,7 @@
           <NavigationProperty Name="Wypozyczenia_Ksiazki" Relationship="Self.FK__Wypozycze__ID_Cz__5629CD9C" FromRole="Czytelnik" ToRole="Wypozyczenia_Ksiazki" />
           <NavigationProperty Name="Wypozyczenia_Filmu" Relationship="Self.FK__Wypozycze__ID_Cz__5CD6CB2B" FromRole="Czytelnik" ToRole="Wypozyczenia_Filmu" />
           <NavigationProperty Name="Wypozyczenia_Czasopisma" Relationship="Self.FK__Wypozycze__ID_Cz__6383C8BA" FromRole="Czytelnik" ToRole="Wypozyczenia_Czasopisma" />
+          <Property Name="Rola" Type="Int32" Nullable="false" DefaultValue="0" />
         </EntityType>
         <EntityType Name="Film">
           <Key>
@@ -851,6 +852,7 @@
           <EntitySetMapping Name="Czytelnik">
             <EntityTypeMapping TypeName="LibDBModel.Czytelnik">
               <MappingFragment StoreEntitySet="Czytelnik">
+                <ScalarProperty Name="Rola" ColumnName="Rola" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Imie" ColumnName="Imie" />
                 <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
