@@ -43,6 +43,7 @@
           <Property Name="Haslo" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Rola" Type="int" Nullable="false" />
+          <Property Name="Wazne" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Film">
           <Key>
@@ -446,6 +447,7 @@
           <NavigationProperty Name="Wypozyczenia_Filmu" Relationship="Self.FK__Wypozycze__ID_Cz__5CD6CB2B" FromRole="Czytelnik" ToRole="Wypozyczenia_Filmu" />
           <NavigationProperty Name="Wypozyczenia_Czasopisma" Relationship="Self.FK__Wypozycze__ID_Cz__6383C8BA" FromRole="Czytelnik" ToRole="Wypozyczenia_Czasopisma" />
           <Property Name="Rola" Type="Int32" Nullable="false" DefaultValue="0" />
+          <Property Name="Wazne" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Film">
           <Key>
@@ -852,6 +854,7 @@
           <EntitySetMapping Name="Czytelnik">
             <EntityTypeMapping TypeName="LibDBModel.Czytelnik">
               <MappingFragment StoreEntitySet="Czytelnik">
+                <ScalarProperty Name="Wazne" ColumnName="Wazne" />
                 <ScalarProperty Name="Rola" ColumnName="Rola" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Imie" ColumnName="Imie" />

@@ -14,7 +14,6 @@ namespace WebApplication1.Controllers
     public class CzytelnicyController : Controller
     {
         private LibDBEntities db = new LibDBEntities();
-
         // GET: Czytelnicy
         [Authorize]
         [HttpGet]
@@ -41,6 +40,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.UserRoleString = RolaToString(czytelnik.Rola);
             return View(czytelnik);
         }
 
@@ -48,6 +48,70 @@ namespace WebApplication1.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        private string RolaToString(int? rola)
+        {
+            switch (rola)
+            {
+                case 0:
+                    {
+                        return "Czytelnik";
+                    }
+                case 1:
+                    {
+                        return "Pracownik";
+                    }
+                case 2:
+                    {
+                        return "Administator";
+                    }
+                default:
+                    {
+                        return "Nieznana Rola: " + rola;
+                    }
+            }
+        }
+
+        private SelectList PopulateDropDownList(Czytelnik czytelnik)
+        {
+            var roles = db.Czytelnik.GroupBy(x => x.Rola);
+            List<SelectListItem> items = new List<SelectListItem>();
+            SelectListItem item = null;
+            foreach (var role in roles)
+            {
+                switch (role.Key)
+                {
+                    case 0:
+                        {
+                            item = new SelectListItem() { Text = "Czytelnik", Value = "0" };
+                            items.Add(item);
+                            break;
+                        }
+                    case 1:
+                        {
+                            items.Add(new SelectListItem() { Text = "Pracownik", Value = "1" });
+                            break;
+                        }
+                    case 2:
+                        {
+                            items.Add(new SelectListItem() { Text = "Administator", Value = "2" });
+                            break;
+                        }
+                    default:
+                        {
+                            items.Add(new SelectListItem() { Text = "Nieznana Rola: " + role.Key, Value = role.Key.ToString() });
+                            break;
+                        }
+                }
+                if (item.Value.Equals(czytelnik.Rola.ToString()))
+                {
+                    item.Selected = true;
+                }
+            }
+
+
+            return new SelectList(items,"Value","Text",czytelnik.Rola);
         }
 
         // POST: Czytelnicy/Create
@@ -70,6 +134,17 @@ namespace WebApplication1.Controllers
         // GET: Czytelnicy/Edit/5
         public ActionResult Edit(int? id)
         {
+            Czytelnik user = null;
+            ViewBag.UserRole = null;
+            if (Session["UserID"] != null)
+            {
+                user = db.Czytelnik.Find(Int32.Parse(Session["UserID"].ToString()));
+            }
+            if (user != null)
+            {
+                ViewBag.UserRole = user.Rola;
+            }
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,6 +154,10 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.UserRoleString = RolaToString(czytelnik.Rola);
+            SelectList list = PopulateDropDownList(czytelnik);
+            //list.Where(x => x.Value.Equals(czytelnik.Rola.ToString())).FirstOrDefault().Selected = true;
+            ViewBag.RoleSelectList = list;
             return View(czytelnik);
         }
 

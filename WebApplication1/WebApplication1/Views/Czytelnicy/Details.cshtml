@@ -9,6 +9,7 @@
 <div>
     <h4>Czytelnik</h4>
     <hr />
+    
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Imie)
@@ -50,9 +51,24 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Wazne)
+        </dt>
+
+        <dd>
+            @Html.CheckBoxFor(model => model.Wazne, new { htmlAttributes = new { @class = "form-control" }, disabled = "disabled" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rola)
+        </dt>
+
+        <dd>
+            @ViewBag.UserRoleString
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
