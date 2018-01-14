@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Czytelnik()
         {
+            this.Rola = 0;
             this.Wiadomosci = new HashSet<Wiadomosci>();
             this.Wypozyczenia_Ksiazki = new HashSet<Wypozyczenia_Ksiazki>();
             this.Wypozyczenia_Filmu = new HashSet<Wypozyczenia_Filmu>();
@@ -29,6 +30,8 @@ namespace WebApplication1.Models
         public string Uzytkownik { get; set; }
         public string Haslo { get; set; }
         public string Email { get; set; }
+        public int Rola { get; set; }
+        public bool Wazne { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wiadomosci> Wiadomosci { get; set; }
@@ -38,5 +41,6 @@ namespace WebApplication1.Models
         public virtual ICollection<Wypozyczenia_Filmu> Wypozyczenia_Filmu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia_Czasopisma> Wypozyczenia_Czasopisma { get; set; }
+        public virtual Rola Rola1 { get; set; }
     }
 }

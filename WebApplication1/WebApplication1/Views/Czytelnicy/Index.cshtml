@@ -4,11 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista Czytelników</h2>
+@if (Session["UserID"] != null) {
+    if (Model.Where(x => x.ID.ToString().Equals(Session["UserID"].ToString())).FirstOrDefault().Rola >= 2)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -19,9 +24,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Uzytkownik)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Haslo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -41,15 +43,20 @@
             @Html.DisplayFor(modelItem => item.Uzytkownik)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Haslo)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @if (Session["UserID"] != null)
+            {
+                if (Model.Where(x => x.ID.ToString().Equals(Session["UserID"])).FirstOrDefault().Rola > item.Rola)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    <br />
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                }
+            }
         </td>
     </tr>
 }

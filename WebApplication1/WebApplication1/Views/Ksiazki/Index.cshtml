@@ -4,11 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista Książek</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (Session["UserID"] != null && Session["UserRole"] != null)
+{
+    if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
 <table class="table">
     <tr>
         <th>
@@ -21,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Strony)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ID_Aktora)
+            @Html.DisplayNameFor(model => model.ID_Autora)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Autor.Imie)
@@ -35,7 +41,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Tytul)
@@ -58,12 +65,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.Wydawca.Nazwa)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+        @if (Session["UserID"] != null && Session["UserRole"] != null)
+    {
+        if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Dodaj do Koszyka","Add","Koszyk",new { id = item.ID, type = 0},null)
+            </td>
+    }
 }
+    </tr>
+    }
 
 </table>

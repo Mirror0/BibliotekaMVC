@@ -1,0 +1,40 @@
+﻿@using WebApplication1.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Koszyk</h2>
+
+<table class="table">
+    <tr>
+        <th>
+
+           @if (Session["Koszyk"] != null)
+           {
+               foreach (var obj in Session["Koszyk"] as List<Rzecz>)
+               {
+                   if (obj.getRzecz().GetType().ToString().Contains("Ksiazka"))
+                   {
+                   @:Ksiazka
+                   }
+                   else if (obj.getRzecz().GetType().ToString().Contains("Film"))
+                   {
+                   @:Film
+                   }
+                   else if (obj.getRzecz().GetType().ToString().Contains("Czasopismo"))
+                   {
+                   @:Czasopismo
+                   }
+                   else if (obj.getRzecz().GetType().ToString().Contains("Praca_Naukowa"))
+                   {
+                   @:Praca Naukowa
+                   }
+                   else
+                   {
+                   @:Default
+                   }
+               }
+           }
+        </th>
+    </tr>
+</table>
