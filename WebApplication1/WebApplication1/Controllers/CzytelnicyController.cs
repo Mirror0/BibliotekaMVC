@@ -74,8 +74,8 @@ namespace WebApplication1.Controllers
         }
 
         private SelectList PopulateDropDownList(Czytelnik czytelnik)
-        {
-            var roles = db.Czytelnik.GroupBy(x => x.Rola);
+        {/*
+            //var roles = db.Czytelnik.GroupBy(x => x.Rola.ID);
             List<SelectListItem> items = new List<SelectListItem>();
             SelectListItem item = null;
             foreach (var role in roles)
@@ -104,14 +104,12 @@ namespace WebApplication1.Controllers
                             break;
                         }
                 }
-                if (item.Value.Equals(czytelnik.Rola.ToString()))
-                {
-                    item.Selected = true;
-                }
             }
 
 
             return new SelectList(items,"Value","Text",czytelnik.Rola);
+            */
+            return null;
         }
 
         // POST: Czytelnicy/Create
@@ -155,9 +153,9 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserRoleString = RolaToString(czytelnik.Rola);
-            SelectList list = PopulateDropDownList(czytelnik);
+            //SelectList list = PopulateDropDownList(czytelnik);
             //list.Where(x => x.Value.Equals(czytelnik.Rola.ToString())).FirstOrDefault().Selected = true;
-            ViewBag.RoleSelectList = list;
+            ViewBag.RoleSelectList = new SelectList(db.Rola,"ID","Nazwa",czytelnik.Rola);
             return View(czytelnik);
         }
 
@@ -166,7 +164,7 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Imie,Nazwisko,Uzytkownik,Haslo,Email")] Czytelnik czytelnik)
+        public ActionResult Edit([Bind(Include = "ID,Imie,Nazwisko,Uzytkownik,Haslo,Email,Wazne,Rola")] Czytelnik czytelnik)
         {
             if (ModelState.IsValid)
             {

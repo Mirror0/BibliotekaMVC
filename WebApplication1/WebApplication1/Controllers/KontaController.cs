@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     
     public class KontaController : Controller
     {
-        private LibDBEntities context = new LibDBEntities();
+        private LibDBEntities db = new LibDBEntities();
         // GET: Login
         [HttpGet]
         [AllowAnonymous]
@@ -35,23 +35,24 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Czytelnik.Add(czytelnik);
+                db.Czytelnik.Add(czytelnik);
             }
             return View(czytelnik);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(Czytelnik czytelnik)
+        public ActionResult Login(Czytelnik czytelnik,string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
-                var currentuser = context.Czytelnik.Where(user => user.Uzytkownik.Equals(czytelnik.Uzytkownik) && user.Haslo.Equals(czytelnik.Haslo)).FirstOrDefault();
+                var currentuser = db.Czytelnik.Where(user => user.Uzytkownik.Equals(czytelnik.Uzytkownik) && user.Haslo.Equals(czytelnik.Haslo)).FirstOrDefault();
                 if (currentuser != null)
                 {
                     FormsAuthentication.SetAuthCookie(currentuser.ID.ToString(), false);
                     Session["UserID"] = currentuser.ID.ToString();
-                    return RedirectToAction("Index", "Czytelnicy");
+                    Session["UserRole"] = currentuser.Rola.ToString();
+                    return Redirect(ReturnUrl);
                 }
             }
 

@@ -210,6 +210,9 @@
     <Compile Include="Models\Praca_Naukowa.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Rola.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Slowo_Kluczowe.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

@@ -32,6 +32,8 @@
         <AssociationConnector Association="LibDBModel.FK__Ksiazka__ID_Slow__440B1D61" ManuallyRouted="false" />
         <AssociationConnector Association="LibDBModel.FK__Ksiazka__ID_Wyda__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="LibDBModel.FK__Wypozycze__ID_Ks__571DF1D5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LibDBModel.Rola" Width="1.5" PointX="3.75" PointY="1.5" />
+        <AssociationConnector Association="LibDBModel.FK_Czytelnik_ToRola" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

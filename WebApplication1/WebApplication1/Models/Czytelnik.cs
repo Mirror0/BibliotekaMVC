@@ -41,5 +41,6 @@ namespace WebApplication1.Models
         public virtual ICollection<Wypozyczenia_Filmu> Wypozyczenia_Filmu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia_Czasopisma> Wypozyczenia_Czasopisma { get; set; }
+        public virtual Rola Rola1 { get; set; }
     }
 }
