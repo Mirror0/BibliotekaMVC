@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         public Ksiazka()
         {
             this.Wypozyczenia_Ksiazki = new HashSet<Wypozyczenia_Ksiazki>();
+            this.Ksiazka_Etykieta = new HashSet<Ksiazka_Etykieta>();
         }
     
         public int ID { get; set; }
@@ -34,5 +35,7 @@ namespace WebApplication1.Models
         public virtual Wydawca Wydawca { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia_Ksiazki> Wypozyczenia_Ksiazki { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ksiazka_Etykieta> Ksiazka_Etykieta { get; set; }
     }
 }

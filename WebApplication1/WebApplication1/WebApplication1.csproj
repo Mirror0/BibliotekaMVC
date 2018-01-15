@@ -163,9 +163,11 @@
     <Compile Include="Controllers\AutorzyController.cs" />
     <Compile Include="Controllers\CzasopismaController.cs" />
     <Compile Include="Controllers\CzytelnicyController.cs" />
+    <Compile Include="Controllers\EtykietasController.cs" />
     <Compile Include="Controllers\FilmyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
+    <Compile Include="Controllers\Ksiazka_EtykietaController.cs" />
     <Compile Include="Controllers\KsiazkiController.cs" />
     <Compile Include="Controllers\KontaController.cs" />
     <Compile Include="Controllers\Prace_NaukoweController.cs" />
@@ -179,6 +181,12 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Autor.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Etykieta.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ksiazka_Etykieta.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rzecz.cs" />
@@ -348,6 +356,16 @@
     <Content Include="Views\Konta\Register.cshtml" />
     <Content Include="Views\Konta\Dashboard.cshtml" />
     <Content Include="Views\Koszyk\Index.cshtml" />
+    <Content Include="Views\Etykietas\Create.cshtml" />
+    <Content Include="Views\Etykietas\Delete.cshtml" />
+    <Content Include="Views\Etykietas\Details.cshtml" />
+    <Content Include="Views\Etykietas\Edit.cshtml" />
+    <Content Include="Views\Etykietas\Index.cshtml" />
+    <Content Include="Views\Ksiazka_Etykieta\Create.cshtml" />
+    <Content Include="Views\Ksiazka_Etykieta\Delete.cshtml" />
+    <Content Include="Views\Ksiazka_Etykieta\Details.cshtml" />
+    <Content Include="Views\Ksiazka_Etykieta\Edit.cshtml" />
+    <Content Include="Views\Ksiazka_Etykieta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Form\" />

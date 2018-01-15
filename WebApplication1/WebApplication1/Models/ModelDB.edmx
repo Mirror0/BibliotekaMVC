@@ -45,6 +45,13 @@
           <Property Name="Rola" Type="int" Nullable="false" />
           <Property Name="Wazne" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Etykieta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Etykieta" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Film">
           <Key>
             <PropertyRef Name="ID" />
@@ -65,6 +72,14 @@
           <Property Name="ID_Autora" Type="int" />
           <Property Name="ID_Aktora" Type="int" />
           <Property Name="ID_Slowo_Kluczowe" Type="int" />
+        </EntityType>
+        <EntityType Name="Ksiazka_Etykieta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_Ksiazka" Type="int" Nullable="false" />
+          <Property Name="ID_Etykieta" Type="int" />
         </EntityType>
         <EntityType Name="Praca_Naukowa">
           <Key>
@@ -218,6 +233,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Ksiazka_E__ID_Et__5224328E">
+          <End Role="Etykieta" Type="Self.Etykieta" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ksiazka_Etykieta" Type="Self.Ksiazka_Etykieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etykieta">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ksiazka_Etykieta">
+              <PropertyRef Name="ID_Etykieta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ksiazka_E__ID_Ks__51300E55">
+          <End Role="Ksiazka" Type="Self.Ksiazka" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ksiazka_Etykieta" Type="Self.Ksiazka_Etykieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ksiazka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ksiazka_Etykieta">
+              <PropertyRef Name="ID_Ksiazka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Praca_Nau__ID_Au__398D8EEE">
           <End Role="Autor" Type="Self.Autor" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -347,8 +390,10 @@
           <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Czasopismo" EntityType="Self.Czasopismo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Czytelnik" EntityType="Self.Czytelnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etykieta" EntityType="Self.Etykieta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ksiazka" EntityType="Self.Ksiazka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ksiazka_Etykieta" EntityType="Self.Ksiazka_Etykieta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Praca_Naukowa" EntityType="Self.Praca_Naukowa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rola" EntityType="Self.Rola" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slowo_Kluczowe" EntityType="Self.Slowo_Kluczowe" Schema="dbo" store:Type="Tables" />
@@ -380,6 +425,14 @@
           <AssociationSet Name="FK__Ksiazka__ID_Wyda__4222D4EF" Association="Self.FK__Ksiazka__ID_Wyda__4222D4EF">
             <End Role="Wydawca" EntitySet="Wydawca" />
             <End Role="Ksiazka" EntitySet="Ksiazka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ksiazka_E__ID_Et__5224328E" Association="Self.FK__Ksiazka_E__ID_Et__5224328E">
+            <End Role="Etykieta" EntitySet="Etykieta" />
+            <End Role="Ksiazka_Etykieta" EntitySet="Ksiazka_Etykieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ksiazka_E__ID_Ks__51300E55" Association="Self.FK__Ksiazka_E__ID_Ks__51300E55">
+            <End Role="Ksiazka" EntitySet="Ksiazka" />
+            <End Role="Ksiazka_Etykieta" EntitySet="Ksiazka_Etykieta" />
           </AssociationSet>
           <AssociationSet Name="FK__Praca_Nau__ID_Au__398D8EEE" Association="Self.FK__Praca_Nau__ID_Au__398D8EEE">
             <End Role="Autor" EntitySet="Autor" />
@@ -500,6 +553,7 @@
           <NavigationProperty Name="Slowo_Kluczowe" Relationship="Self.FK__Ksiazka__ID_Slow__440B1D61" FromRole="Ksiazka" ToRole="Slowo_Kluczowe" />
           <NavigationProperty Name="Wydawca" Relationship="Self.FK__Ksiazka__ID_Wyda__4222D4EF" FromRole="Ksiazka" ToRole="Wydawca" />
           <NavigationProperty Name="Wypozyczenia_Ksiazki" Relationship="Self.FK__Wypozycze__ID_Ks__571DF1D5" FromRole="Ksiazka" ToRole="Wypozyczenia_Ksiazki" />
+          <NavigationProperty Name="Ksiazka_Etykieta" Relationship="LibDBModel.FK__Ksiazka_E__ID_Ks__51300E55" FromRole="Ksiazka" ToRole="Ksiazka_Etykieta" />
         </EntityType>
         <EntityType Name="Praca_Naukowa">
           <Key>
@@ -844,6 +898,16 @@
             <End Role="Rola" EntitySet="Rola" />
             <End Role="Czytelnik" EntitySet="Czytelnik" />
           </AssociationSet>
+          <EntitySet Name="Etykieta" EntityType="LibDBModel.Etykieta" />
+          <EntitySet Name="Ksiazka_Etykieta" EntityType="LibDBModel.Ksiazka_Etykieta" />
+          <AssociationSet Name="FK__Ksiazka_E__ID_Et__5224328E" Association="LibDBModel.FK__Ksiazka_E__ID_Et__5224328E">
+            <End Role="Etykieta" EntitySet="Etykieta" />
+            <End Role="Ksiazka_Etykieta" EntitySet="Ksiazka_Etykieta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ksiazka_E__ID_Ks__51300E55" Association="LibDBModel.FK__Ksiazka_E__ID_Ks__51300E55">
+            <End Role="Ksiazka" EntitySet="Ksiazka" />
+            <End Role="Ksiazka_Etykieta" EntitySet="Ksiazka_Etykieta" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Rola">
           <Key>
@@ -862,6 +926,52 @@
             </Principal>
             <Dependent Role="Czytelnik">
               <PropertyRef Name="Rola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Etykieta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Etykieta1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ksiazka_Etykieta" Relationship="LibDBModel.FK__Ksiazka_E__ID_Et__5224328E" FromRole="Etykieta" ToRole="Ksiazka_Etykieta" />
+        </EntityType>
+        <EntityType Name="Ksiazka_Etykieta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_Ksiazka" Type="Int32" Nullable="false" />
+          <Property Name="ID_Etykieta" Type="Int32" />
+          <NavigationProperty Name="Etykieta" Relationship="LibDBModel.FK__Ksiazka_E__ID_Et__5224328E" FromRole="Ksiazka_Etykieta" ToRole="Etykieta" />
+          <NavigationProperty Name="Ksiazka" Relationship="LibDBModel.FK__Ksiazka_E__ID_Ks__51300E55" FromRole="Ksiazka_Etykieta" ToRole="Ksiazka" />
+        </EntityType>
+        <Association Name="FK__Ksiazka_E__ID_Et__5224328E">
+          <End Type="LibDBModel.Etykieta" Role="Etykieta" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LibDBModel.Ksiazka_Etykieta" Role="Ksiazka_Etykieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etykieta">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ksiazka_Etykieta">
+              <PropertyRef Name="ID_Etykieta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ksiazka_E__ID_Ks__51300E55">
+          <End Type="LibDBModel.Ksiazka" Role="Ksiazka" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LibDBModel.Ksiazka_Etykieta" Role="Ksiazka_Etykieta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ksiazka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ksiazka_Etykieta">
+              <PropertyRef Name="ID_Ksiazka" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1010,6 +1120,23 @@
             <EntityTypeMapping TypeName="LibDBModel.Rola">
               <MappingFragment StoreEntitySet="Rola">
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etykieta">
+            <EntityTypeMapping TypeName="LibDBModel.Etykieta">
+              <MappingFragment StoreEntitySet="Etykieta">
+                <ScalarProperty Name="Etykieta1" ColumnName="Etykieta" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ksiazka_Etykieta">
+            <EntityTypeMapping TypeName="LibDBModel.Ksiazka_Etykieta">
+              <MappingFragment StoreEntitySet="Ksiazka_Etykieta">
+                <ScalarProperty Name="ID_Etykieta" ColumnName="ID_Etykieta" />
+                <ScalarProperty Name="ID_Ksiazka" ColumnName="ID_Ksiazka" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
