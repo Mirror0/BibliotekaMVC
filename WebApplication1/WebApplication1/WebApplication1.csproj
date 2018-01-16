@@ -366,9 +366,11 @@
     <Content Include="Views\Ksiazka_Etykieta\Details.cshtml" />
     <Content Include="Views\Ksiazka_Etykieta\Edit.cshtml" />
     <Content Include="Views\Ksiazka_Etykieta\Index.cshtml" />
+    <Content Include="Views\Ksiazki\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Form\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

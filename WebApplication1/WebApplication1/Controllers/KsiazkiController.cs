@@ -14,13 +14,142 @@ namespace WebApplication1.Controllers
     {
         private LibDBEntities db = new LibDBEntities();
 
-        // GET: Ksiazki
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
         {
             var ksiazka = db.Ksiazka.Include(k => k.Autor).Include(k => k.Slowo_Kluczowe).Include(k => k.Wydawca);
             return View(ksiazka.ToList());
+        }
+        // GET: Ksiazki/Search
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Search(String SearchText)
+        {
+            var ksiazka = db.Ksiazka.Include(k => k.Autor).Include(k => k.Slowo_Kluczowe).Include(k => k.Wydawca);
+            
+            char[] values = new char[] { '&', '|', '?'};
+            Boolean and = false, or = false, not = false;
+            CharCheck(SearchText, ref and, ref or, ref not);
+
+            if (!values.Any(SearchText.Contains))
+            {
+                {
+                    ksiazka = BasicSearch(SearchText, ksiazka);
+                }
+            }
+            else
+            {
+                List<string> split = SearchText.Split(values).ToList();
+                int i = 0;
+                var searchksiazka = db.Ksiazka.Include(k => k.Autor).Include(k => k.Slowo_Kluczowe).Include(k => k.Wydawca);
+                if (and)
+                {
+                    ksiazka = ksiazka.Where(k => k.Tytul.ToUpper().Contains("xxx"));
+                    ksiazka = ksiazka.Union(getTytulAndImie(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getTytulAndNazwisko(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getTytulAndIsbn(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getImieAndNazwisko(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getImieAndIsbn(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getNazwiskoAndIsbn(split, searchksiazka));
+                    split.Reverse();
+                    ksiazka = ksiazka.Union(getTytulAndImie(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getTytulAndNazwisko(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getTytulAndIsbn(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getImieAndNazwisko(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getImieAndIsbn(split, searchksiazka));
+                    ksiazka = ksiazka.Union(getNazwiskoAndIsbn(split, searchksiazka));
+                }
+                else
+                {
+                    foreach (var part in split)
+                    {
+
+                        if (or)
+                        {
+                            if (i == 0)
+                            {
+                                ksiazka = ksiazka.Where(k => k.Tytul.ToUpper().Contains("xxx"));
+                                i += 1;
+                            }
+
+                            ksiazka = ksiazka.Union(BasicSearch(part, searchksiazka));
+                        }
+                        else if (not)
+                        {
+                            searchksiazka = BasicSearch(part, searchksiazka);
+                            ksiazka = ksiazka.Except(searchksiazka);
+
+                        }
+                    }
+                }
+
+            }
+            
+            return View(ksiazka.ToList());
+        }
+
+        private static IQueryable<Ksiazka> getTytulAndImie(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Tytul.ToUpper().Contains(one.ToUpper())
+                                    && k.Autor.Imie.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> getTytulAndNazwisko(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Tytul.ToUpper().Contains(one.ToUpper())
+                                                            && k.Autor.Nazwisko.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> getTytulAndIsbn(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Tytul.ToUpper().Contains(one.ToUpper())
+                                                            && k.ISBN.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> getImieAndNazwisko(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Autor.Imie.ToUpper().Contains(one.ToUpper())
+                                                            && k.Autor.Nazwisko.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> getImieAndIsbn(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Autor.Imie.ToUpper().Contains(one.ToUpper())
+                                                            && k.ISBN.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> getNazwiskoAndIsbn(List<string> part, IQueryable<Ksiazka> searchksiazka)
+        {
+            string one = part.ElementAt(0);
+            string two = part.ElementAt(1);
+            return searchksiazka.Where(k => k.Autor.Nazwisko.ToUpper().Contains(one.ToUpper())
+                                                            && k.ISBN.ToUpper().Contains(two.ToUpper()));
+        }
+
+        private static IQueryable<Ksiazka> BasicSearch(string SearchText, IQueryable<Ksiazka> searchksiazka)
+        {
+            return searchksiazka.Where(k => k.Tytul.ToUpper().Contains(SearchText.ToUpper())
+                                                        || k.Autor.Imie.ToUpper().Contains(SearchText.ToUpper())
+                                                        || k.Autor.Nazwisko.ToUpper().Contains(SearchText.ToUpper())
+                                                        || k.ISBN.ToUpper().Contains(SearchText.ToUpper()));
+        }
+
+        private static void CharCheck(string SearchText, ref bool and, ref bool or, ref bool not)
+        {
+            if (SearchText.Contains("&")) { and = true; }
+            else if (SearchText.Contains("|")) { or = true; }
+            else if (SearchText.Contains("?")) { not = true; }
         }
 
         // GET: Ksiazki/Details/5

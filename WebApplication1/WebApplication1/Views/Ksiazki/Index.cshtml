@@ -38,6 +38,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Wydawca.Nazwa)
         </th>
+        <th>
+            @Html.DisplayName("Etykieta")
+        </th>
+
         <th></th>
     </tr>
 
@@ -65,6 +69,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Wydawca.Nazwa)
         </td>
+        @foreach (var ke in item.Ksiazka_Etykieta)
+        {
+            <td>
+                  @Html.DisplayFor(modelItem => ke.Etykieta.Etykieta1)
+            </td>            
+        }
         @if (Session["UserID"] != null && Session["UserRole"] != null)
     {
         if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
