@@ -1,0 +1,50 @@
+﻿@model WebApplication1.Models.Wypozyczenia_Ksiazki
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wypozyczenia_Ksiazki</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Wypozyczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Wypozyczenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Zwrotu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Zwrotu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Czytelnik.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Czytelnik.Imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ksiazka.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ksiazka.Tytul)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -23,6 +23,7 @@ namespace WebApplication1.Models
         public int ID { get; set; }
         public string Tytul { get; set; }
         public Nullable<int> ID_Aktora { get; set; }
+        public int Stan_Magazynowy { get; set; }
     
         public virtual Aktor Aktor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

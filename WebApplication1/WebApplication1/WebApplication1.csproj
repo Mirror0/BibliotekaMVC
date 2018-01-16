@@ -172,6 +172,10 @@
     <Compile Include="Controllers\Slowa_KluczoweController.cs" />
     <Compile Include="Controllers\WiadomosciController.cs" />
     <Compile Include="Controllers\WydawcyController.cs" />
+    <Compile Include="Controllers\Wypozyczenia_CzasopismaController.cs" />
+    <Compile Include="Controllers\Wypozyczenia_FilmuController.cs" />
+    <Compile Include="Controllers\Wypozyczenia_KsiazkiController.cs" />
+    <Compile Include="Controllers\Wypozyczenia_Praca_NaukowaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +222,9 @@
     <Compile Include="Models\Slowo_Kluczowe.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Stan.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Wiadomosci.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -231,6 +238,9 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Wypozyczenia_Ksiazki.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Wypozyczenia_Praca_Naukowa.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -348,6 +358,18 @@
     <Content Include="Views\Konta\Register.cshtml" />
     <Content Include="Views\Konta\Dashboard.cshtml" />
     <Content Include="Views\Koszyk\Index.cshtml" />
+    <Content Include="Views\Wypozyczenia_Czasopisma\Details.cshtml" />
+    <Content Include="Views\Wypozyczenia_Czasopisma\Edit.cshtml" />
+    <Content Include="Views\Wypozyczenia_Czasopisma\Index.cshtml" />
+    <Content Include="Views\Wypozyczenia_Filmu\Details.cshtml" />
+    <Content Include="Views\Wypozyczenia_Filmu\Edit.cshtml" />
+    <Content Include="Views\Wypozyczenia_Filmu\Index.cshtml" />
+    <Content Include="Views\Wypozyczenia_Ksiazki\Details.cshtml" />
+    <Content Include="Views\Wypozyczenia_Ksiazki\Edit.cshtml" />
+    <Content Include="Views\Wypozyczenia_Ksiazki\Index.cshtml" />
+    <Content Include="Views\Wypozyczenia_Praca_Naukowa\Details.cshtml" />
+    <Content Include="Views\Wypozyczenia_Praca_Naukowa\Edit.cshtml" />
+    <Content Include="Views\Wypozyczenia_Praca_Naukowa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Form\" />
