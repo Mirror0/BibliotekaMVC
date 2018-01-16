@@ -20,7 +20,7 @@
     @Html.Hidden("bstan", Model.Stan)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Data_Zwrotu, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Data Zwrotu", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Data_Zwrotu, String.Format("{0:d}", ((DateTime)Model.Data_Zwrotu).ToShortDateString()), new { @class = "datefield", type = "date" })
             @Html.ValidationMessageFor(model => model.Data_Zwrotu, "", new { @class = "text-danger" })

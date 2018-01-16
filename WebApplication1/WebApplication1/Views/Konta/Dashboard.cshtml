@@ -1,8 +1,13 @@
-﻿@{
+﻿@model WebApplication1.Models.Czytelnik
+@{
     ViewBag.Title = "Dashboard";
 }
 
-<h2>Dashboard</h2>
+<h2>Panel Użytkownika</h2>
+@if (Model != null)
+{
+    <h4>Witaj, @Model.Imie @Model.Nazwisko</h4>
+}
 
 <table class="table">
 

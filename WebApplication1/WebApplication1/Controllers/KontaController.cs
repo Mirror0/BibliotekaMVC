@@ -69,7 +69,13 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Dashboard()
         {
-            return View();
+            if (Session["UserID"] == null)
+            {
+                return View();
+            }
+            int id = Int32.Parse(Session["UserID"].ToString());
+            Czytelnik user = db.Czytelnik.Find(id);
+            return View(user);
         }
 
         public ActionResult Logout()
