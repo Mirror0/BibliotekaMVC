@@ -38,14 +38,15 @@
                         }
                     </li>
                     <li>
-                        @using (Html.BeginForm("Search", "Ksiazki"))
-                        {
-                            <p>
-                                Search Books: @Html.TextBox("SearchText", ViewBag.FilterValue as string)
-                                <input type="submit" value="Szukaj"
-                                       />
-                            </p>
-                        }
+                        <div class="navbar-form">
+                            @using (Html.BeginForm("Search", "Ksiazki"))
+                            {
+                                
+                                    @Html.TextBox("SearchText", ViewBag.FilterValue as string)
+                                    <input type="submit" value="Szukaj" />
+                                
+                            }
+                        </div>
                     </li>
                     
                 </ul>

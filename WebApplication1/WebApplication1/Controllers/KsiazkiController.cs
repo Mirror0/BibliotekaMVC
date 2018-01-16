@@ -60,11 +60,11 @@ namespace WebApplication1.Controllers
                     ksiazka = ksiazka.Union(getImieAndIsbn(split, searchksiazka));
                     ksiazka = ksiazka.Union(getNazwiskoAndIsbn(split, searchksiazka));
                 }
+                
                 else
                 {
                     foreach (var part in split)
                     {
-
                         if (or)
                         {
                             if (i == 0)
@@ -77,9 +77,8 @@ namespace WebApplication1.Controllers
                         }
                         else if (not)
                         {
-                            searchksiazka = BasicSearch(part, searchksiazka);
-                            ksiazka = ksiazka.Except(searchksiazka);
-
+                            if (!string.IsNullOrEmpty(part)) {
+                                ksiazka = ksiazka.Except(BasicSearch(part, searchksiazka)); }
                         }
                     }
                 }
