@@ -28,6 +28,7 @@ namespace WebApplication1.Models
         public Nullable<int> ID_Autora { get; set; }
         public Nullable<int> ID_Aktora { get; set; }
         public Nullable<int> ID_Slowo_Kluczowe { get; set; }
+        public int Stan_Magazynowy { get; set; }
     
         public virtual Autor Autor { get; set; }
         public virtual Slowo_Kluczowe Slowo_Kluczowe { get; set; }

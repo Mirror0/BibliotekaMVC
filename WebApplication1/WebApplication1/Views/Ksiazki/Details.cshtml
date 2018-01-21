@@ -4,14 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły Książki</h2>
 
 <div>
-    <h4>Ksiazka</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.DisplayName("Tytuł")
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Strony)
+            @Html.DisplayName("Ilość Stron")
         </dt>
 
         <dd>
@@ -35,15 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ID_Aktora)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_Aktora)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Autor.Imie)
+            @Html.DisplayName("Imie Autora")
         </dt>
 
         <dd>
@@ -51,7 +42,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Slowo_Kluczowe.Slowo)
+            @Html.DisplayName("Nazwisko Autora")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autor.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Słowo Kluczowe")
         </dt>
 
         <dd>
@@ -59,16 +58,17 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Wydawca.Nazwa)
+            @Html.DisplayName("Nazwa Wydawcy")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Wydawca.Nazwa)
         </dd>
 
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Powrót do listy", "Index")
 </p>

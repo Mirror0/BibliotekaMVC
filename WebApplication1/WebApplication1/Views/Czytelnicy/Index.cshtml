@@ -9,7 +9,7 @@
     if (Model.Where(x => x.ID.ToString().Equals(Session["UserID"].ToString())).FirstOrDefault().Rola >= 2)
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Dodaj nowego czytelnika", "Create")
         </p>
     }
 }
@@ -17,16 +17,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Imie)
+            @Html.DisplayName("Imię")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            @Html.DisplayName("Nazwisko")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Uzytkownik)
+            @Html.DisplayName("Login")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayName("E-Mail")
         </th>
         <th></th>
     </tr>
@@ -45,19 +45,23 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-        <td>
-            @if (Session["UserID"] != null)
+            @if (Session["UserID"] != null && Session["UserRole"] != null)
             {
                 if (Model.Where(x => x.ID.ToString().Equals(Session["UserID"])).FirstOrDefault().Rola > item.Rola)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                    <br />
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                    <br />
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    <td>
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
+                    </td>
+                }
+                else
+                {
+                    <td></td>
                 }
             }
-        </td>
+
+
     </tr>
 }
 

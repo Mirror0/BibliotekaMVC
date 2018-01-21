@@ -4,15 +4,14 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Usuń Książkę</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy napewno chcesz usunąć tą pozycje?</h3>
 <div>
-    <h4>Ksiazka</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.DisplayName("Tytuł")
         </dt>
 
         <dd>
@@ -28,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Strony)
+            @Html.DisplayName("Ilość Stron")
         </dt>
 
         <dd>
@@ -36,15 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ID_Aktora)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_Aktora)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Autor.Imie)
+            @Html.DisplayName("Imie Autora")
         </dt>
 
         <dd>
@@ -52,7 +43,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Slowo_Kluczowe.Slowo)
+            @Html.DisplayName("Nazwisko Autora")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autor.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Słowo Kluczowe")
         </dt>
 
         <dd>
@@ -60,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Wydawca.Nazwa)
+            @Html.DisplayName("Nazwa Wydawcy")
         </dt>
 
         <dd>

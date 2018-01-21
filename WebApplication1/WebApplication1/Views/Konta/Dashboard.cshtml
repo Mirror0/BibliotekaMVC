@@ -1,8 +1,13 @@
-﻿@{
+﻿@model WebApplication1.Models.Czytelnik
+@{
     ViewBag.Title = "Dashboard";
 }
 
-<h2>Dashboard</h2>
+<h2>Panel Użytkownika</h2>
+@if (Model != null)
+{
+    <h4>Witaj, @Model.Imie @Model.Nazwisko</h4>
+}
 
 <table class="table">
 
@@ -17,8 +22,21 @@
                     @Html.ActionLink("Moje Wiadomości", "Index", "Wiadomosci", new { }, null)
                 </li>
                 <li>
+                    @Html.ActionLink("Wpożyczone Książki", "Index", "Wypozyczenia_Ksiazki", new { }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Wpożyczone Filmy", "Index", "Wypozyczenia_Filmu", new { }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Wpożyczone Czasopisma", "Index", "Wypozyczenia_Czasopisma", new { }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Wpożyczone Prace Naukowe", "Index", "Wypozyczenia_Praca_Naukowa", new { }, null)
+                </li>
+                <li>
                     @Html.ActionLink("Wyloguj", "Logout", "Konta", new { }, null)
                 </li>
+
             </ul>
         </td>
         @if (Session["UserRole"] != null)

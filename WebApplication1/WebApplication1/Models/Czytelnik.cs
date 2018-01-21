@@ -22,6 +22,7 @@ namespace WebApplication1.Models
             this.Wypozyczenia_Ksiazki = new HashSet<Wypozyczenia_Ksiazki>();
             this.Wypozyczenia_Filmu = new HashSet<Wypozyczenia_Filmu>();
             this.Wypozyczenia_Czasopisma = new HashSet<Wypozyczenia_Czasopisma>();
+            this.Wypozyczenia_Praca_Naukowa = new HashSet<Wypozyczenia_Praca_Naukowa>();
         }
     
         public int ID { get; set; }
@@ -42,5 +43,7 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wypozyczenia_Czasopisma> Wypozyczenia_Czasopisma { get; set; }
         public virtual Rola Rola1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wypozyczenia_Praca_Naukowa> Wypozyczenia_Praca_Naukowa { get; set; }
     }
 }

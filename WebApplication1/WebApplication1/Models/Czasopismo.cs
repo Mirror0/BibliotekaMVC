@@ -26,6 +26,7 @@ namespace WebApplication1.Models
         public Nullable<int> Strony { get; set; }
         public Nullable<int> ID_Wydawcy { get; set; }
         public Nullable<int> ID_Autora { get; set; }
+        public int Stan_Magazynowy { get; set; }
     
         public virtual Autor Autor { get; set; }
         public virtual Wydawca Wydawca { get; set; }

@@ -14,10 +14,19 @@ namespace WebApplication1.Models
     
     public partial class Praca_Naukowa
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Praca_Naukowa()
+        {
+            this.Wypozyczenia_Praca_Naukowa = new HashSet<Wypozyczenia_Praca_Naukowa>();
+        }
+    
         public int ID { get; set; }
         public string Tytul { get; set; }
         public Nullable<int> ID_Autora { get; set; }
+        public int Stan_Magazynowy { get; set; }
     
         public virtual Autor Autor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wypozyczenia_Praca_Naukowa> Wypozyczenia_Praca_Naukowa { get; set; }
     }
 }

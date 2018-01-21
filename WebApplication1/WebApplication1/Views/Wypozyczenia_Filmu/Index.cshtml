@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebApplication1.Models.Wypozyczenia_Filmu>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Wypozyczenia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Zwrotu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Czytelnik.Imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Film.Tytul)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Wypozyczenia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Zwrotu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Czytelnik.Imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Film.Tytul)
+        </td>
+        @if (Session["UserID"] != null && Session["UserRole"] != null)
+        {
+            if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
+            {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            </td>
+            }
+        }
+        </tr>
+}
+
+</table>

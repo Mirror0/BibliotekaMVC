@@ -19,8 +19,10 @@ namespace WebApplication1.Models
         public Nullable<int> ID_Ksiazki { get; set; }
         public Nullable<System.DateTime> Data_Wypozyczenia { get; set; }
         public Nullable<System.DateTime> Data_Zwrotu { get; set; }
+        public int Stan { get; set; }
     
         public virtual Czytelnik Czytelnik { get; set; }
         public virtual Ksiazka Ksiazka { get; set; }
+        public virtual Stan Stan1 { get; set; }
     }
 }
