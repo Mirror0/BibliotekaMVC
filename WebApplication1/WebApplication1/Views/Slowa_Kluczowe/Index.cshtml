@@ -4,14 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lsita Słow kluczowych</h2>
+<h2>Lista słów kluczowych</h2>
 
 @if (Session["UserID"] != null && Session["UserRole"] != null)
 {
     if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Dodaj nowe słowo kluczowe", "Create")
         </p>
     }
 }
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Strona)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Slowo)
+            @Html.DisplayName("Słowo")
         </th>
         <th></th>
     </tr>
@@ -40,9 +40,9 @@
         if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
         {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
             </td>
     }
 }

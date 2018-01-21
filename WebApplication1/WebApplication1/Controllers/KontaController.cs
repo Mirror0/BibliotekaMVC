@@ -81,7 +81,7 @@ namespace WebApplication1.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Ksiazki");
         }
     }
 }

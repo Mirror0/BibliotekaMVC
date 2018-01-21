@@ -11,27 +11,27 @@
     if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Dodaj nowe czasopismo", "Create")
         </p>
     }
 }
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.DisplayName("Tytuł")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ISBN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Strony)
+            @Html.DisplayName("Autor")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Autor.Imie)
+            @Html.DisplayName("Wydawca")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wydawca.Nazwa)
-        </th>
+        <td>
+            @Html.DisplayName("Dostępne")
+        </td>
         <th></th>
     </tr>
 
@@ -45,24 +45,29 @@
             @Html.DisplayFor(modelItem => item.ISBN)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Strony)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Autor.Imie)
+            @Html.DisplayFor(modelItem => item.Autor.Imie)&nbsp;
+            @Html.DisplayFor(modelItem => item.Autor.Nazwisko)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Wydawca.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stan_Magazynowy)
         </td>
         @if (Session["UserID"] != null && Session["UserRole"] != null)
     {
         if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
         {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
             </td>
     }
+    else
+    {
+        <td></td>
+}
 }
     </tr>
     }
