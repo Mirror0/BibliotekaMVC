@@ -23,7 +23,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @{
+                    <li>@{
                         string loggedin = HttpContext.Current.User.Identity.Name;
                         if (!string.IsNullOrEmpty(loggedin))
                         {
@@ -35,7 +35,20 @@
                         }
 
 
-                     }
+                        }
+                    </li>
+                    <li>
+                        <div class="navbar-form">
+                            @using (Html.BeginForm("Search", "Ksiazki"))
+                            {
+                                
+                                    @Html.TextBox("SearchText", ViewBag.FilterValue as string)
+                                    <input type="submit" value="Szukaj" />
+                                
+                            }
+                        </div>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
