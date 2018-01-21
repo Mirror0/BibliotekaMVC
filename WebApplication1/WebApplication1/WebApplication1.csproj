@@ -191,7 +191,7 @@
     <Compile Include="Models\Autor.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\Validators.cs" />
     <Compile Include="Models\Rzecz.cs" />
     <Compile Include="Models\Czasopismo.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>

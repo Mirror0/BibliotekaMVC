@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -63,6 +64,17 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                CzasopismoValidator validator = new CzasopismoValidator();
+                ValidationResult result = validator.Validate(wypozyczenia_Czasopisma);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Czasopisma.Stan);
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(wypozyczenia_Czasopisma);
+                }
+                
+
                 db.Entry(wypozyczenia_Czasopisma).State = EntityState.Modified;
                 if (bstan != wypozyczenia_Czasopisma.Stan && wypozyczenia_Czasopisma.Stan == 3)
                 {

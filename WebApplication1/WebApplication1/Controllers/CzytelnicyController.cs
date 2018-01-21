@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -73,45 +74,6 @@ namespace WebApplication1.Controllers
             }
         }
 
-        private SelectList PopulateDropDownList(Czytelnik czytelnik)
-        {/*
-            //var roles = db.Czytelnik.GroupBy(x => x.Rola.ID);
-            List<SelectListItem> items = new List<SelectListItem>();
-            SelectListItem item = null;
-            foreach (var role in roles)
-            {
-                switch (role.Key)
-                {
-                    case 0:
-                        {
-                            item = new SelectListItem() { Text = "Czytelnik", Value = "0" };
-                            items.Add(item);
-                            break;
-                        }
-                    case 1:
-                        {
-                            items.Add(new SelectListItem() { Text = "Pracownik", Value = "1" });
-                            break;
-                        }
-                    case 2:
-                        {
-                            items.Add(new SelectListItem() { Text = "Administator", Value = "2" });
-                            break;
-                        }
-                    default:
-                        {
-                            items.Add(new SelectListItem() { Text = "Nieznana Rola: " + role.Key, Value = role.Key.ToString() });
-                            break;
-                        }
-                }
-            }
-
-
-            return new SelectList(items,"Value","Text",czytelnik.Rola);
-            */
-            return null;
-        }
-
         // POST: Czytelnicy/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,6 +83,15 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                CzytelnikValidator validator = new CzytelnikValidator();
+                ValidationResult result = validator.Validate(czytelnik);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(czytelnik);
+                }
+
                 db.Czytelnik.Add(czytelnik);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -168,6 +139,15 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                CzytelnikValidator validator = new CzytelnikValidator();
+                ValidationResult result = validator.Validate(czytelnik);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(czytelnik);
+                }
+
                 db.Entry(czytelnik).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

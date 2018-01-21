@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,12 +31,22 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Register(Czytelnik czytelnik)
+        public ActionResult Register([Bind(Include = "ID,Imie,Nazwisko,Uzytkownik,Haslo,Email")]Czytelnik czytelnik)
         {
-
             if (ModelState.IsValid)
             {
+                CzytelnikValidator validator = new CzytelnikValidator();
+                ValidationResult result = validator.Validate(czytelnik);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(czytelnik);
+                }
+
                 db.Czytelnik.Add(czytelnik);
+                db.SaveChanges();
+                return RedirectToAction("Login");
             }
             return View(czytelnik);
         }
