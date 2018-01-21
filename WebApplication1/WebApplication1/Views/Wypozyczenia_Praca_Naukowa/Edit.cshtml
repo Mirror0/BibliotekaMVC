@@ -23,7 +23,7 @@
     <div class="form-group">
         @Html.Label("Data Zwrotu", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Data_Zwrotu, new { htmlAttributes = new { @class = "datafield", @type = "date" } })
+            @Html.TextBoxFor(model => model.Data_Zwrotu, String.Format("{0:d}", ((DateTime)Model.Data_Zwrotu).ToShortDateString()), new { @class = "datefield", type = "date" })
             @Html.ValidationMessageFor(model => model.Data_Zwrotu, "", new { @class = "text-danger" })
         </div>
     </div>

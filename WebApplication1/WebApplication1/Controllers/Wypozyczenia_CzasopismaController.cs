@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            stan = wypozyczenia_Czasopisma.Stan;
+            ViewBag.BStan = wypozyczenia_Czasopisma.Stan;
             ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Czasopisma.Stan);
             return View(wypozyczenia_Czasopisma);
         }
@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ID_Czytelnika,ID_Czasopisma,Data_Wypozyczenia,Data_Zwrotu")] Wypozyczenia_Czasopisma wypozyczenia_Czasopisma,int bstan)
+        public ActionResult Edit([Bind(Include = "ID,ID_Czytelnika,ID_Czasopisma,Data_Wypozyczenia,Data_Zwrotu,Stan")] Wypozyczenia_Czasopisma wypozyczenia_Czasopisma,int bstan)
         {
             if (ModelState.IsValid)
             {

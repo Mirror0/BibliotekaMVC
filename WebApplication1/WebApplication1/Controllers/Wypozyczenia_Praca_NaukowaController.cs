@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            stan = wypozyczenia_Praca_Naukowa.Stan;
+            ViewBag.BStan = wypozyczenia_Praca_Naukowa.Stan;
             ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Praca_Naukowa.Stan);
             return View(wypozyczenia_Praca_Naukowa);
         }
