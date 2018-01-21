@@ -12,7 +12,14 @@
 
 <div class="form-horizontal">
     <hr />
-
+    @if (ViewBag.Error != null)
+    {
+        foreach (string str in ViewBag.Error)
+        {
+            @Html.Label(str, new { @class = "text-danger" })
+            <br />
+        }
+    }
     <div class="form-group">
         @Html.Label("Nazwa Użytkownika", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -28,7 +35,7 @@
             @Html.ValidationMessageFor(model => model.Haslo, "", new { @class = "text-danger" })
         </div>
     </div>
-        @Html.ActionLink("Zarejestruj się", "Register", "Konta")
+    @Html.ActionLink("Zarejestruj się", "Register", "Konta")
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Zaloguj" class="btn btn-default" />

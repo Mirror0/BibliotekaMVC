@@ -88,7 +88,12 @@ namespace WebApplication1.Controllers
 
                 if (!result.IsValid)
                 {
-                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    List<string> errors = new List<string>();
+                    foreach (ValidationFailure vf in result.Errors)
+                    {
+                        errors.Add(vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errors;
                     return View(czytelnik);
                 }
 
@@ -124,8 +129,6 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserRoleString = RolaToString(czytelnik.Rola);
-            //SelectList list = PopulateDropDownList(czytelnik);
-            //list.Where(x => x.Value.Equals(czytelnik.Rola.ToString())).FirstOrDefault().Selected = true;
             ViewBag.RoleSelectList = new SelectList(db.Rola,"ID","Nazwa",czytelnik.Rola);
             return View(czytelnik);
         }
@@ -144,7 +147,14 @@ namespace WebApplication1.Controllers
 
                 if (!result.IsValid)
                 {
-                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    List<string> errors = new List<string>();
+                    foreach (ValidationFailure vf in result.Errors)
+                    {
+                        errors.Add(vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errors;
+                    ViewBag.UserRoleString = RolaToString(czytelnik.Rola);
+                    ViewBag.RoleSelectList = new SelectList(db.Rola, "ID", "Nazwa", czytelnik.Rola);
                     return View(czytelnik);
                 }
 

@@ -52,6 +52,16 @@ namespace WebApplication1.Models
         public CzytelnikValidator()
         {
             RuleFor(x => x.Email).EmailAddress().WithMessage("Niepoprawny adres email");
+            RuleFor(x => x.Uzytkownik).NotEmpty().WithMessage("Login jest wymagany");
+            RuleFor(x => x.Haslo).NotEmpty().WithMessage("Hasło jest wymagane");
+        }
+    }
+
+    public class LoginValidator : AbstractValidator<Czytelnik>
+    {
+        public LoginValidator()
+        {
+            RuleFor(x => x.Wazne).Must(x => x == true).WithMessage("Twoje konto nie jest jeszcze aktywne");
         }
     }
 }

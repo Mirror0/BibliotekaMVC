@@ -40,7 +40,12 @@ namespace WebApplication1.Controllers
 
                 if (!result.IsValid)
                 {
-                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    List<string> errors = new List<string>();
+                    foreach(ValidationFailure vf in result.Errors)
+                    {
+                        errors.Add(vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errors;
                     return View(czytelnik);
                 }
 
@@ -57,9 +62,24 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> errors = new List<string>();
                 var currentuser = db.Czytelnik.Where(user => user.Uzytkownik.Equals(czytelnik.Uzytkownik) && user.Haslo.Equals(czytelnik.Haslo)).FirstOrDefault();
                 if (currentuser != null)
                 {
+                    LoginValidator validator = new LoginValidator();
+                    ValidationResult result = validator.Validate(currentuser);
+
+                    if (!result.IsValid)
+                    {
+                        foreach (ValidationFailure vf in result.Errors)
+                        {
+                            errors.Add(vf.ErrorMessage);
+                        }
+                        ViewBag.Error = errors;
+                        return View(czytelnik);
+                    }
+
+
                     FormsAuthentication.SetAuthCookie(currentuser.ID.ToString(), false);
                     Session["UserID"] = currentuser.ID.ToString();
                     Session["UserRole"] = currentuser.Rola.ToString();
@@ -72,6 +92,8 @@ namespace WebApplication1.Controllers
                         return RedirectToAction("Index","Ksiazki");
                     }
                 }
+                errors.Add("Nieprawidłowy login lub hasło");
+                ViewBag.Error = errors;
             }
 
             return View(czytelnik);
