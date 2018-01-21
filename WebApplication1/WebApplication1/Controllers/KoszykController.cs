@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -125,17 +126,33 @@ namespace WebApplication1.Controllers
 
             if (sum > limit)
             {
+                ViewBag.Error = "Przekroczono limit wypożyczeń";
                 return RedirectToAction("Index"); // Tutaj dać jakiś błąd
             }
 
             foreach (Rzecz r in list)
             {
+                RzeczValidator validator = new RzeczValidator();
+                FluentValidation.Results.ValidationResult result = validator.Validate(r);
+                if (!result.IsValid)
+                {
+                    List<string> errorStr = new List<string>();
+                    foreach (ValidationFailure vf in result.Errors)
+                    {
+                        errorStr.Add( vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errorStr;
+                    return View(list.ToList());
+                    //return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                }
+
                 r.ID_Czytelnika = Int32.Parse(Session["UserID"].ToString());
                 if (r.type == 0)
                 {
                     Ksiazka k = db.Ksiazka.Find(r.ID);
                     if (r.ilosc > k.Stan_Magazynowy)
                     {
+                        ViewBag.Error = "Nie można przetworzyć zamówienia";
                         return RedirectToAction("Index"); // Tutaj dać jakiś błąd
                     }
                     for (int i = 0; i < r.ilosc; i++)
