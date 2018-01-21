@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8a16b6df9d0f4828ba51d07feb698b58" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="8a16b6df9d0f4828ba51d07feb698b58" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="LibDBModel.Aktor" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LibDBModel.Autor" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LibDBModel.Czasopismo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
@@ -34,10 +34,6 @@
         <AssociationConnector Association="LibDBModel.FK__Wypozycze__ID_Ks__571DF1D5" ManuallyRouted="false" />
         <EntityTypeShape EntityType="LibDBModel.Rola" Width="1.5" PointX="3.75" PointY="1.5" />
         <AssociationConnector Association="LibDBModel.FK_Czytelnik_ToRola" />
-        <EntityTypeShape EntityType="LibDBModel.Etykieta" Width="1.5" PointX="8" PointY="13.25" />
-        <EntityTypeShape EntityType="LibDBModel.Ksiazka_Etykieta" Width="1.5" PointX="9.875" PointY="11.625" />
-        <AssociationConnector Association="LibDBModel.FK__Ksiazka_E__ID_Et__5224328E" />
-        <AssociationConnector Association="LibDBModel.FK__Ksiazka_E__ID_Ks__51300E55" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

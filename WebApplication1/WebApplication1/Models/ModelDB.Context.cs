@@ -39,7 +39,5 @@ namespace WebApplication1.Models
         public virtual DbSet<Wypozyczenia_Filmu> Wypozyczenia_Filmu { get; set; }
         public virtual DbSet<Wypozyczenia_Ksiazki> Wypozyczenia_Ksiazki { get; set; }
         public virtual DbSet<Rola> Rola { get; set; }
-        public virtual DbSet<Etykieta> Etykieta { get; set; }
-        public virtual DbSet<Ksiazka_Etykieta> Ksiazka_Etykieta { get; set; }
     }
 }
