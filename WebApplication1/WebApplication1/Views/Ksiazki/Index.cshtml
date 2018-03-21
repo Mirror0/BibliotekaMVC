@@ -21,10 +21,13 @@
             @Html.DisplayName("Tytuł")
         </th>
         <th>
-            @Html.DisplayName("Imie Autora")
+            @Html.DisplayName("Autor")
         </th>
         <th>
-            @Html.DisplayName("Nazwisko Autora")
+            @Html.DisplayName("ISBN")
+        </th>
+        <th>
+            @Html.DisplayName("Dostępne")
         </th>
         <th></th>
     </tr>
@@ -36,23 +39,31 @@
             @Html.DisplayFor(modelItem => item.Tytul)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Autor.Imie)
+            @Html.DisplayFor(modelItem => item.Autor.Imie)&nbsp;
+            @Html.DisplayFor(modelItem => item.Autor.Nazwisko)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Autor.Nazwisko)
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stan_Magazynowy)
         </td>
         @if (Session["UserID"] != null && Session["UserRole"] != null)
     {
-        if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
+        <td>
+            @if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
         {
-            <td>
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Usuń", "Delete", new { id = item.ID }) |
-                @Html.ActionLink("Dodaj do Koszyka", "Add", "Koszyk", new { id = item.ID, type = 0 }, null)
-            </td>
+
+            @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) @:|
+
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) @:|
+
+            @Html.ActionLink("Usuń", "Delete", new { id = item.ID }) @:|
     }
+            @Html.ActionLink("Dodaj do Koszyka", "Add", "Koszyk", new { id = item.ID, type = 0 }, null)
+        </td>
 }
+
     </tr>
     }
 

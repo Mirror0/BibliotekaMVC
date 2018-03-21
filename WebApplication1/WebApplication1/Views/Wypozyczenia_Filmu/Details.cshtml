@@ -4,14 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>Wypozyczenia_Filmu</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Data_Wypozyczenia)
+            @Html.DisplayName("Data wypożyczenia")
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Data_Zwrotu)
+            @Html.DisplayName("Data Zwrotu")
         </dt>
 
         <dd>
@@ -27,15 +26,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Czytelnik.Imie)
+            @Html.DisplayName("Czytelnik")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Czytelnik.Imie)
+            @Html.DisplayFor(model => model.Czytelnik.Imie)@:&nbsp;
+            @Html.DisplayFor(model => model.Czytelnik.Nazwisko)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Film.Tytul)
+            @Html.DisplayName("Tytuł")
         </dt>
 
         <dd>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Powrót do listy", "Index")
 </p>

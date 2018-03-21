@@ -11,17 +11,20 @@
     if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
     {
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Dodaj nowy film", "Create")
         </p>
     }
 }
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.DisplayName("Tytuł")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Aktor.Imie)
+            @Html.DisplayName("Aktor")
+        </th>
+        <th>
+            @Html.DisplayName("Dostępne")
         </th>
         <th></th>
     </tr>
@@ -33,19 +36,27 @@
             @Html.DisplayFor(modelItem => item.Tytul)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Aktor.Imie)
+            @Html.DisplayFor(modelItem => item.Aktor.Imie)&nbsp;
+            @Html.DisplayFor(modelItem => item.Aktor.Nazwisko)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stan_Magazynowy)
+        </td>
+
         @if (Session["UserID"] != null && Session["UserRole"] != null)
     {
-        if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
-        {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-    }
-}
+        <td>
+            @if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
+            {
+
+            @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) @:|
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) @:|
+            @Html.ActionLink("Usuń", "Delete", new { id = item.ID }) @:|
+
+            }
+            @Html.ActionLink("Dodaj do Koszyka", "Add", "Koszyk", new { id = item.ID, type = 1 }, null)
+        </td>
+        }
     </tr>
     }
 

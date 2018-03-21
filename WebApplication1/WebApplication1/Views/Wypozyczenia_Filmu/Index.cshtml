@@ -4,21 +4,18 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Wypożyczone filmy</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Data_Wypozyczenia)
+            @Html.DisplayName("Data Wypożyczenia")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Data_Zwrotu)
+            @Html.DisplayName("Data Zwrotu")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Czytelnik.Imie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Film.Tytul)
+            @Html.DisplayName("Tytuł")
         </th>
         <th></th>
     </tr>
@@ -32,9 +29,6 @@
             @Html.DisplayFor(modelItem => item.Data_Zwrotu)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Czytelnik.Imie)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Film.Tytul)
         </td>
         @if (Session["UserID"] != null && Session["UserRole"] != null)
@@ -42,8 +36,8 @@
             if (Int32.Parse(Session["UserRole"].ToString()) >= 1)
             {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
             </td>
             }
         }

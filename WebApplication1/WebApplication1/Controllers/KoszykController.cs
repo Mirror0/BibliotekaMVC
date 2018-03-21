@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -106,7 +107,7 @@ namespace WebApplication1.Controllers
             if (!string.IsNullOrEmpty(save))
             {
                 Session["Koszyk"] = list;
-                return RedirectToAction("Index");
+                return View(list.ToList());
             }
 
             if (Session["UserID"] == null)
@@ -125,18 +126,33 @@ namespace WebApplication1.Controllers
 
             if (sum > limit)
             {
-                return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                ViewBag.Error = "Przekroczono limit wypożyczeń";
+                return View(list.ToList()); // Tutaj dać jakiś błąd
             }
 
             foreach (Rzecz r in list)
             {
+                RzeczValidator validator = new RzeczValidator();
+                FluentValidation.Results.ValidationResult result = validator.Validate(r);
+                if (!result.IsValid)
+                {
+                    List<string> errorStr = new List<string>();
+                    foreach (ValidationFailure vf in result.Errors)
+                    {
+                        errorStr.Add( vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errorStr;
+                    return View(list.ToList());
+                }
+
                 r.ID_Czytelnika = Int32.Parse(Session["UserID"].ToString());
                 if (r.type == 0)
                 {
                     Ksiazka k = db.Ksiazka.Find(r.ID);
                     if (r.ilosc > k.Stan_Magazynowy)
                     {
-                        return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                        ViewBag.Error = "Nie można przetworzyć zamówienia";
+                        return View(list.ToList());
                     }
                     for (int i = 0; i < r.ilosc; i++)
                     {
@@ -149,7 +165,8 @@ namespace WebApplication1.Controllers
                     Film f = db.Film.Find(r.ID);
                     if (r.ilosc > f.Stan_Magazynowy)
                     {
-                        return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                        ViewBag.Error = "Nie można przetworzyć zamówienia";
+                        return View(list.ToList());
                     }
 
                     for (int i = 0; i < r.ilosc; i++)
@@ -163,7 +180,8 @@ namespace WebApplication1.Controllers
                     Czasopismo c = db.Czasopismo.Find(r.ID);
                     if (r.ilosc > c.Stan_Magazynowy)
                     {
-                        return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                        ViewBag.Error = "Nie można przetworzyć zamówienia";
+                        return View(list.ToList());
                     }
 
                     for (int i = 0; i < r.ilosc; i++)
@@ -177,7 +195,8 @@ namespace WebApplication1.Controllers
                     Praca_Naukowa pr = db.Praca_Naukowa.Find(r.ID);
                     if (r.ilosc > pr.Stan_Magazynowy)
                     {
-                        return RedirectToAction("Index"); // Tutaj dać jakiś błąd
+                        ViewBag.Error = "Nie można przetworzyć zamówienia";
+                        return View(list.ToList());
                     }
 
                     for (int i = 0; i < r.ilosc; i++)
@@ -194,49 +213,5 @@ namespace WebApplication1.Controllers
             Session["Koszyk"] = null;
             return RedirectToAction("Index","Ksiazki",null);
         }
-
-        
     }
-    /*
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class DateGreaterThenAttribute : ValidationAttribute
-    {
-        private const string DefaultErrorMessage = "{0} must be after {1}.";
-
-        public DateTime OtherProperty { get; private set; }
-
-        public DateGreaterThenAttribute(DateTime otherProperty)
-          : base(DefaultErrorMessage)
-        {
-            if (otherProperty == null)
-            {
-                throw new ArgumentNullException("otherProperty");
-            }
-
-            OtherProperty = otherProperty;
-        }
-
-        public override string FormatErrorMessage(string name)
-        {
-            return string.Format(ErrorMessageString, name, OtherProperty);
-        }
-
-        protected override ValidationResult IsValid(object value,
-                              ValidationContext validationContext)
-        {
-            if (value != null)
-            {
-                var otherProperty = (DateTime) validationContext.ObjectInstance;
-
-                if (((DateTime)value).CompareTo(otherProperty) < 0)
-                {
-                    return new ValidationResult(
-                      FormatErrorMessage(validationContext.DisplayName));
-                }
-            }
-
-            return ValidationResult.Success;
-        }
-    }
-    */
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,12 +31,27 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Register(Czytelnik czytelnik)
+        public ActionResult Register([Bind(Include = "ID,Imie,Nazwisko,Uzytkownik,Haslo,Email")]Czytelnik czytelnik)
         {
-
             if (ModelState.IsValid)
             {
+                CzytelnikValidator validator = new CzytelnikValidator();
+                ValidationResult result = validator.Validate(czytelnik);
+
+                if (!result.IsValid)
+                {
+                    List<string> errors = new List<string>();
+                    foreach(ValidationFailure vf in result.Errors)
+                    {
+                        errors.Add(vf.ErrorMessage);
+                    }
+                    ViewBag.Error = errors;
+                    return View(czytelnik);
+                }
+
                 db.Czytelnik.Add(czytelnik);
+                db.SaveChanges();
+                return RedirectToAction("Login");
             }
             return View(czytelnik);
         }
@@ -46,9 +62,24 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> errors = new List<string>();
                 var currentuser = db.Czytelnik.Where(user => user.Uzytkownik.Equals(czytelnik.Uzytkownik) && user.Haslo.Equals(czytelnik.Haslo)).FirstOrDefault();
                 if (currentuser != null)
                 {
+                    LoginValidator validator = new LoginValidator();
+                    ValidationResult result = validator.Validate(currentuser);
+
+                    if (!result.IsValid)
+                    {
+                        foreach (ValidationFailure vf in result.Errors)
+                        {
+                            errors.Add(vf.ErrorMessage);
+                        }
+                        ViewBag.Error = errors;
+                        return View(czytelnik);
+                    }
+
+
                     FormsAuthentication.SetAuthCookie(currentuser.ID.ToString(), false);
                     Session["UserID"] = currentuser.ID.ToString();
                     Session["UserRole"] = currentuser.Rola.ToString();
@@ -61,6 +92,8 @@ namespace WebApplication1.Controllers
                         return RedirectToAction("Index","Ksiazki");
                     }
                 }
+                errors.Add("Nieprawidłowy login lub hasło");
+                ViewBag.Error = errors;
             }
 
             return View(czytelnik);
@@ -81,7 +114,7 @@ namespace WebApplication1.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Ksiazki");
         }
     }
 }

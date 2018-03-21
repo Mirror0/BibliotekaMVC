@@ -40,8 +40,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Imie" Type="varchar" MaxLength="15" />
           <Property Name="Nazwisko" Type="varchar" MaxLength="30" />
-          <Property Name="Uzytkownik" Type="varchar" MaxLength="30" />
-          <Property Name="Haslo" Type="varchar" MaxLength="255" />
+          <Property Name="Uzytkownik" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Haslo" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Rola" Type="int" Nullable="false" />
           <Property Name="Wazne" Type="bit" Nullable="false" />
@@ -122,8 +122,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Czytelnika" Type="int" />
           <Property Name="ID_Czasopisma" Type="int" />
-          <Property Name="Data_Wypozyczenia" Type="datetime" />
-          <Property Name="Data_Zwrotu" Type="datetime" />
+          <Property Name="Data_Wypozyczenia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="datetime" Nullable="false" />
           <Property Name="Stan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Wypozyczenia_Filmu">
@@ -133,8 +133,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Czytelnika" Type="int" />
           <Property Name="ID_Filmu" Type="int" />
-          <Property Name="Data_Wypozyczenia" Type="datetime" />
-          <Property Name="Data_Zwrotu" Type="datetime" />
+          <Property Name="Data_Wypozyczenia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="datetime" Nullable="false" />
           <Property Name="Stan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Wypozyczenia_Ksiazki">
@@ -144,8 +144,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Czytelnika" Type="int" />
           <Property Name="ID_Ksiazki" Type="int" />
-          <Property Name="Data_Wypozyczenia" Type="datetime" />
-          <Property Name="Data_Zwrotu" Type="datetime" />
+          <Property Name="Data_Wypozyczenia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="datetime" Nullable="false" />
           <Property Name="Stan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Wypozyczenia_Praca_Naukowa">
@@ -155,8 +155,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Czytelnika" Type="int" />
           <Property Name="ID_Pracy" Type="int" />
-          <Property Name="Data_Wypozyczenia" Type="datetime" />
-          <Property Name="Data_Zwrotu" Type="datetime" />
+          <Property Name="Data_Wypozyczenia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="datetime" Nullable="false" />
           <Property Name="Stan" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Czasopism__ID_Au__4BAC3F29">
@@ -591,8 +591,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Imie" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Uzytkownik" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Haslo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Uzytkownik" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Haslo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Wiadomosci" Relationship="Self.FK__Wiadomosc__ID_Cz__5070F446" FromRole="Czytelnik" ToRole="Wiadomosci" />
           <NavigationProperty Name="Wypozyczenia_Ksiazki" Relationship="Self.FK__Wypozycze__ID_Cz__5629CD9C" FromRole="Czytelnik" ToRole="Wypozyczenia_Ksiazki" />
@@ -677,8 +677,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Czytelnika" Type="Int32" />
           <Property Name="ID_Czasopisma" Type="Int32" />
-          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" />
-          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" />
+          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="Czasopismo" Relationship="Self.FK__Wypozycze__ID_Cz__6477ECF3" FromRole="Wypozyczenia_Czasopisma" ToRole="Czasopismo" />
           <NavigationProperty Name="Czytelnik" Relationship="Self.FK__Wypozycze__ID_Cz__6383C8BA" FromRole="Wypozyczenia_Czasopisma" ToRole="Czytelnik" />
           <Property Name="Stan" Type="Int32" Nullable="false" />
@@ -691,8 +691,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Czytelnika" Type="Int32" />
           <Property Name="ID_Filmu" Type="Int32" />
-          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" />
-          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" />
+          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="Czytelnik" Relationship="Self.FK__Wypozycze__ID_Cz__5CD6CB2B" FromRole="Wypozyczenia_Filmu" ToRole="Czytelnik" />
           <NavigationProperty Name="Film" Relationship="Self.FK__Wypozycze__ID_Fi__5DCAEF64" FromRole="Wypozyczenia_Filmu" ToRole="Film" />
           <Property Name="Stan" Type="Int32" Nullable="false" />
@@ -705,8 +705,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Czytelnika" Type="Int32" />
           <Property Name="ID_Ksiazki" Type="Int32" />
-          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" />
-          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" />
+          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="Czytelnik" Relationship="Self.FK__Wypozycze__ID_Cz__5629CD9C" FromRole="Wypozyczenia_Ksiazki" ToRole="Czytelnik" />
           <NavigationProperty Name="Ksiazka" Relationship="Self.FK__Wypozycze__ID_Ks__571DF1D5" FromRole="Wypozyczenia_Ksiazki" ToRole="Ksiazka" />
           <Property Name="Stan" Type="Int32" Nullable="false" />
@@ -1037,8 +1037,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Czytelnika" Type="Int32" />
           <Property Name="ID_Pracy" Type="Int32" />
-          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" />
-          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" />
+          <Property Name="Data_Wypozyczenia" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Data_Zwrotu" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="Czytelnik" Relationship="LibDBModel.FK__Wypozycze__ID_Cz__4F47C5E3" FromRole="Wypozyczenia_Praca_Naukowa" ToRole="Czytelnik" />
           <NavigationProperty Name="Praca_Naukowa" Relationship="LibDBModel.FK__Wypozycze__ID_Pr__503BEA1C" FromRole="Wypozyczenia_Praca_Naukowa" ToRole="Praca_Naukowa" />
           <Property Name="Stan" Type="Int32" Nullable="false" />

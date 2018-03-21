@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -49,7 +50,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            stan = wypozyczenia_Praca_Naukowa.Stan;
+            ViewBag.BStan = wypozyczenia_Praca_Naukowa.Stan;
             ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Praca_Naukowa.Stan);
             return View(wypozyczenia_Praca_Naukowa);
         }
@@ -63,6 +64,17 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                PracaValidator validator = new PracaValidator();
+                ValidationResult result = validator.Validate(wypozyczenia_Praca_Naukowa);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Praca_Naukowa.Stan);
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(wypozyczenia_Praca_Naukowa);
+                }
+
+
                 db.Entry(wypozyczenia_Praca_Naukowa).State = EntityState.Modified;
                 if (bstan != wypozyczenia_Praca_Naukowa.Stan && wypozyczenia_Praca_Naukowa.Stan == 3)
                 {

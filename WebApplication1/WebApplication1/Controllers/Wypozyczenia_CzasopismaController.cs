@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using FluentValidation.Results;
 
 namespace WebApplication1.Controllers
 {
@@ -49,7 +50,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            stan = wypozyczenia_Czasopisma.Stan;
+            ViewBag.BStan = wypozyczenia_Czasopisma.Stan;
             ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Czasopisma.Stan);
             return View(wypozyczenia_Czasopisma);
         }
@@ -59,10 +60,21 @@ namespace WebApplication1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ID_Czytelnika,ID_Czasopisma,Data_Wypozyczenia,Data_Zwrotu")] Wypozyczenia_Czasopisma wypozyczenia_Czasopisma,int bstan)
+        public ActionResult Edit([Bind(Include = "ID,ID_Czytelnika,ID_Czasopisma,Data_Wypozyczenia,Data_Zwrotu,Stan")] Wypozyczenia_Czasopisma wypozyczenia_Czasopisma,int bstan)
         {
             if (ModelState.IsValid)
             {
+                CzasopismoValidator validator = new CzasopismoValidator();
+                ValidationResult result = validator.Validate(wypozyczenia_Czasopisma);
+
+                if (!result.IsValid)
+                {
+                    ViewBag.Stan = new SelectList(db.Stan, "ID", "Opis", wypozyczenia_Czasopisma.Stan);
+                    ViewBag.Error = result.Errors[0].ErrorMessage;
+                    return View(wypozyczenia_Czasopisma);
+                }
+                
+
                 db.Entry(wypozyczenia_Czasopisma).State = EntityState.Modified;
                 if (bstan != wypozyczenia_Czasopisma.Stan && wypozyczenia_Czasopisma.Stan == 3)
                 {

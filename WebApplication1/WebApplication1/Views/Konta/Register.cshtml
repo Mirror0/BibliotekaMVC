@@ -54,6 +54,16 @@
             </div>
         </div>
 
+                @if (ViewBag.Error != null)
+                {
+                    foreach (string str in ViewBag.Error)
+                    {
+                        @Html.Label(str, new { @class = "text-danger" })
+                        <br />
+                    }
+                }
+
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Zarejestruj" class="btn btn-default" />

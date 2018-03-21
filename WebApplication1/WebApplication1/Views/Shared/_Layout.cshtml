@@ -20,18 +20,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Książki", "Index", "Ksiazki")</li>
+                    <li>@Html.ActionLink("Czasopisma", "Index", "Czasopisma")</li>
+                    <li>@Html.ActionLink("Prace Naukowe", "Index", "Prace_Naukowe")</li>
+                    <li>@Html.ActionLink("Filmy", "Index", "Filmy")</li>
                     @{
-                        string loggedin = HttpContext.Current.User.Identity.Name;
-                        if (!string.IsNullOrEmpty(loggedin))
-                        {
-                            <li> @Html.ActionLink("Koszyk", "Index", "Koszyk")</li>
-                            <li> @Html.ActionLink("Zarządzaj", "Dashboard", "Konta")</li>
-                        }
-                        else
-                        {
-                            <li> @Html.ActionLink("Zaloguj się", "Login", "Konta")</li>
-                        }
-                     }
+        string loggedin = HttpContext.Current.User.Identity.Name;
+        if (!string.IsNullOrEmpty(loggedin))
+        {
+                <li> @Html.ActionLink("Koszyk", "Index", "Koszyk")</li>
+                <li> @Html.ActionLink("Zarządzaj", "Dashboard", "Konta")</li>
+}
+else
+{
+                <li> @Html.ActionLink("Zaloguj się", "Login", "Konta")</li>
+}
+                    }
                 </ul>
             </div>
         </div>
